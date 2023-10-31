@@ -1,10 +1,14 @@
 #include <stdio.h>
 #include <string.h>
 
+#define MAX_LENGTH 100 // Constant Definition
+
+// Encryption Function
+
 void CaesarEncrypt(char str[], int key)
 {
 	int i;
-	char cipherStr[100];
+	char cipherStr[MAX_LENGTH];
 	
 	for(i = 0; i < strlen(str); i++)
 	{
@@ -25,17 +29,19 @@ void CaesarEncrypt(char str[], int key)
 		}
 	}
 	
-	cipherStr[i] = '\0';
+	cipherStr[i] = '\0';  // We Use It, Because Array Is Finished.
 	
 	printf("Encrypt Text: %s\n",cipherStr);
 	
 }
 
+// Decryption Function
+
 void CaesarDecode(char cipherStr[], int key)
 {
 	
 	int i;
-	char decodedStr[100];
+	char decodedStr[MAX_LENGTH];
 	
 	for(i = 0; i < strlen(cipherStr); i++)
 	{
@@ -66,8 +72,10 @@ void CaesarDecode(char cipherStr[], int key)
 
 int main()
 {
-	char txt[100];
-	int key,choose;
+	
+	char txt[MAX_LENGTH];
+	char temp[MAX_LENGTH];
+	int i,key,choose,validInput = 1;
 	
 	while (1)
 	{
@@ -85,52 +93,97 @@ int main()
     		break;
 		}
 
+		getchar(); // We Use It To Clear The Remaining Data From Scanf.
 		
 		switch(choose)
 		{
 			case 1:
 				
 				printf("Please Enter The Text To Be Encrypted:\n");
-				scanf("%s",&txt);
-	
-				printf("Please Enter The Encryption Key (Between 0-25)\n");
-				scanf("%d",&key);
-			
-				if(key < 0 || key > 25)
+				fgets(temp, sizeof(temp), stdin); // Parameter Order: 1- Where Will The Data Be Transferred? 2- How Much Data Will Be Taken ? 3- Where To Get Data ?
+				temp[MAX_LENGTH - 1] = '\0';     // We Indicate That The Data Is Finished By Placing A Null Character At The End Of The Array.
+				     
+				if(strlen(temp) >= MAX_LENGTH - 1)
 				{
-					printf("Encryption Key Must Be Between 0-25 !!\n");
+					printf("You Can Enter A Maximum Of 100 Characters!");
+					return 0;
 				}
-			
-				else
+								
+				for(i = 0; temp[i] != '\0'; i++)
 				{
-					CaesarEncrypt(txt,key);
+					if(!isalpha(temp[i]) && temp[i] != '\n' && temp[i] != '\r')
+					{
+						printf("Please Enter Only Letters!\n");
+						validInput = 0;
+						return 0;
+					}
 				}
 				
+				if(validInput)
+				{
+					sscanf(temp,"%s",txt);
+					printf("Please Enter The Encryption Key (Between 0-25)\n");
+					scanf("%d",&key);
+			
+					if(key < 0 || key > 25)
+					{
+						printf("Encryption Key Must Be Between 0-25 !!\n");
+					}
+			
+					else
+					{
+						CaesarEncrypt(txt,key);
+					}
+				}
+				
+				getchar();
 				break;
 			
 			case 2:
 				
 				printf("Please Enter The Text To Be Decrypted:\n");
-				scanf("%s",txt);
-			
-				printf("Please Enter The Decryption Key (Between 0-25)\n");
-        		scanf("%d", &key);
-        		
-        		if(key < 0 || key > 25)
-        		{
-        			printf("Decryption Key Must Be Between 0-25 !!\n");
+				fgets(temp, sizeof(temp),stdin);
+				temp[MAX_LENGTH - 1] = '\0'; 
+				
+				if(strlen(temp) >= MAX_LENGTH - 1 )
+				{
+					printf("You Can Enter A Maximum Of 100 Characters!");
+					return 0;
 				}
 				
-				else
+				for(i = 0; i < temp[i] != '\0'; i++)
 				{
-					CaesarDecode(txt, key);
+					if(!isalpha(temp[i]) && temp[i] != '\n' && temp[i] != '\r')
+					{
+						printf("Please Enter Only Letters!\n");
+						validInput = 0;
+						return 0;
+					}
+				}
+				
+				if(validInput)
+				{
+					sscanf(temp , "%s" , txt);
+					printf("Please Enter The Decryption Key (Between 0-25)\n");
+        			scanf("%d", &key);
+        		
+        			if(key < 0 || key > 25)
+        			{
+        				printf("Decryption Key Must Be Between 0-25 !!\n");
+					}
+				
+					else
+					{
+						CaesarDecode(txt, key);
+					}
 				}
         		
+        		getchar();
 				break;
 				        	
         	case 3:
         		
-        		system("cls");
+        		system("cls"); // This Command Is Clear The Screen.
         		break;
         		
         	case 4:
