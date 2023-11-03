@@ -31,7 +31,7 @@ void CaesarEncrypt(char str[], int key)
 	
 	cipherStr[i] = '\0';  // We Use It, Because Array Is Finished.
 	
-	printf("Encrypt Text: %s\n",cipherStr);
+	printf("Encrypt Text: %s\n\n",cipherStr);
 	
 }
 
@@ -66,7 +66,7 @@ void CaesarDecode(char cipherStr[], int key)
 	decodedStr[i] = '\0';
 	
 	
-    printf("Decoded Text: %s\n", decodedStr);
+    printf("Decoded Text: %s\n\n", decodedStr);
 
 }
 
@@ -81,9 +81,13 @@ int main()
 	{
 		
 		printf("1-Encrypt Caesar\n");
+		printf("**********************\n");		
 		printf("2-Decrypt Caesar\n");
+		printf("**********************\n");
 		printf("3-Clean The Terminal\n");
-		printf("4-Close The Program\n\n");
+		printf("**********************\n");
+		printf("4-Close The Program\n");
+		printf("**********************\n\n");
 		printf("Please Make Your Choice\n");
 		scanf("%d",&choose);
 		
