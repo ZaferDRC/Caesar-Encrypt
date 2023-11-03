@@ -91,7 +91,7 @@ int main()
 		printf("Please Make Your Choice\n");
 		scanf("%d",&choose);
 		
-		if (choose < 1 || choose > 4)
+		if (choose == 0 || choose < 1 || choose > 4)
 		{
     		printf("Your Choice Must Be Between 1-4 !!\n");
     		break;
@@ -125,13 +125,13 @@ int main()
 				
 				if(validInput)
 				{
-					sscanf(temp,"%s",txt);
-					printf("Please Enter The Encryption Key (Between 0-25)\n");
+					sscanf(temp,"%s",txt); // Parameter Order: 1- is a character array (string) from which the input will be read. 2-  is the format specifier used to read a string from temp. 3- is the variable where the read string will be stored.
+					printf("Please Enter The Encryption Key (Between 1-25)\n");
 					scanf("%d",&key);
 			
-					if(key < 0 || key > 25)
+					if(key == 0 || key < 0 || key > 25)
 					{
-						printf("Encryption Key Must Be Between 0-25 !!\n");
+						printf("Encryption Key Must Be Between 1-25 !!\n");
 					}
 			
 					else
@@ -168,12 +168,12 @@ int main()
 				if(validInput)
 				{
 					sscanf(temp , "%s" , txt);
-					printf("Please Enter The Decryption Key (Between 0-25)\n");
+					printf("Please Enter The Decryption Key (Between 1-25)\n");
         			scanf("%d", &key);
         		
-        			if(key < 0 || key > 25)
+        			if(key == 0 || key < 0 || key > 25)
         			{
-        				printf("Decryption Key Must Be Between 0-25 !!\n");
+        				printf("Decryption Key Must Be Between 1-25 !!\n");
 					}
 				
 					else
